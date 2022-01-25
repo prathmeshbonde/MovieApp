@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/widgets/trending.dart';
 import 'package:tmdb_api/tmdb_api.dart';
+
+import 'components/text.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +18,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         brightness: Brightness.dark,
-        primaryColor: Colors.red.shade900,
       ),
       home: const Home(),
     );
@@ -57,21 +60,27 @@ class _HomeState extends State<Home> {
       topRatedMovies = topRatedResult['results'];
       topTVShows = topTVResult['results'];
     });
-    print(trendingMovies);
+    // print(trendingMovies);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text(
-          'Movie App',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
+        title: const ModifiedText(
+          text: 'Movie App',
+          color: Colors.white,
+          size: 25,
         ),
+        // leading: Image(image: AssetImage('assets/images/logo.png'),),
+        leading: const Icon(Icons.movie_creation_rounded, size: 40),
         backgroundColor: Colors.red.shade900,
+      ),
+      body: ListView(
+        children: [
+          TrendingMovies(trending: trendingMovies),
+        ],
       ),
     );
   }
