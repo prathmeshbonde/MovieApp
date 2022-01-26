@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/widgets/trending.dart';
+import 'package:movie_app/widgets/toprated.dart';
+import 'package:movie_app/widgets/trendingmovies.dart';
+import 'package:movie_app/widgets/trendingshows.dart';
+import 'package:movie_app/widgets/tv.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 import 'components/text.dart';
@@ -32,6 +35,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List trendingMovies = [];
+  List trendingTV = [];
   List topRatedMovies = [];
   List topTVShows = [];
   final String apikey = '6f009c4a09734ea2dd73a2633cfa71fb';
@@ -50,12 +54,16 @@ class _HomeState extends State<Home> {
       logConfig: const ConfigLogger(showErrorLogs: true),
     );
 
-    Map trendingResult = await tmdbWithCustomLogs.v3.trending.getTrending();
+    Map trendingMResult = await tmdbWithCustomLogs.v3.trending
+        .getTrending(mediaType: MediaType.movie);
+    Map trendingTVResult = await tmdbWithCustomLogs.v3.trending
+        .getTrending(mediaType: MediaType.tv);
     Map topRatedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
     Map topTVResult = await tmdbWithCustomLogs.v3.tv.getPopular();
 
     setState(() {
-      trendingMovies = trendingResult['results'];
+      trendingMovies = trendingMResult['results'];
+      trendingTV = trendingTVResult['results'];
       topRatedMovies = topRatedResult['results'];
       topTVShows = topTVResult['results'];
     });
@@ -78,7 +86,10 @@ class _HomeState extends State<Home> {
       ),
       body: ListView(
         children: [
+          TV(tv: topTVShows),
+          TopRated(toprated: topRatedMovies),
           TrendingMovies(trending: trendingMovies),
+          TrendingShows(trending: trendingTV),
         ],
       ),
     );
