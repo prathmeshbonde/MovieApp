@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/components/text.dart';
+import 'package:movie_app/descriptionpage.dart';
 
 class TrendingShows extends StatelessWidget {
   const TrendingShows({Key? key, required this.trending}) : super(key: key);
@@ -28,7 +29,22 @@ class TrendingShows extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DescriptionPage(
+                          name: trending[index]['name'],
+                          description: trending[index]['overview'],
+                          bannerurl: 'https://image.tmdb.org/t/p/w500' +
+                              trending[index]['backdrop_path'],
+                          posterurl: 'https://image.tmdb.org/t/p/w500' +
+                              trending[index]['poster_path'],
+                          vote: trending[index]['vote_average'].toString(),
+                        ),
+                      ),
+                    );
+                  },
                   child: Container(
                     width: 140,
                     padding: const EdgeInsets.all(5),

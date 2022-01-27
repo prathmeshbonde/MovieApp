@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/components/text.dart';
+import 'package:movie_app/descriptionpage.dart';
 
 class TV extends StatelessWidget {
   const TV({Key? key, required this.tv}) : super(key: key);
@@ -27,7 +28,22 @@ class TV extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DescriptionPage(
+                          name: tv[index]['name'],
+                          description: tv[index]['overview'],
+                          bannerurl: 'https://image.tmdb.org/t/p/w500' +
+                              tv[index]['backdrop_path'],
+                          posterurl: 'https://image.tmdb.org/t/p/w500' +
+                              tv[index]['poster_path'],
+                          vote: tv[index]['vote_average'].toString(),
+                        ),
+                      ),
+                    );
+                  },
                   child: Container(
                     width: 250,
                     padding: const EdgeInsets.all(5),

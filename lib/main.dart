@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
       topRatedMovies = topRatedResult['results'];
       topTVShows = topTVResult['results'];
     });
-    // print(trendingMovies);
+    // print(topTVShows);
   }
 
   @override
