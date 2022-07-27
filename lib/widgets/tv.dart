@@ -36,7 +36,7 @@ class TV extends StatelessWidget {
                           name: tv[index]['name'],
                           description: tv[index]['overview'],
                           bannerurl: 'https://image.tmdb.org/t/p/w500' +
-                              (tv[index]['backdrop_path'] ?? 'No Image Found'),
+                              (tv[index]['backdrop_path'] ?? 'No Image'),
                           posterurl: 'https://image.tmdb.org/t/p/w500' +
                               tv[index]['poster_path'],
                           vote: tv[index]['vote_average'].toString(),
