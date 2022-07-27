@@ -36,7 +36,7 @@ class TV extends StatelessWidget {
                           name: tv[index]['name'],
                           description: tv[index]['overview'],
                           bannerurl: 'https://image.tmdb.org/t/p/w500' +
-                              tv[index]['backdrop_path'],
+                              (tv[index]['backdrop_path'] ?? 'No Image Found'),
                           posterurl: 'https://image.tmdb.org/t/p/w500' +
                               tv[index]['poster_path'],
                           vote: tv[index]['vote_average'].toString(),
@@ -57,7 +57,7 @@ class TV extends StatelessWidget {
                             image: DecorationImage(
                               image: NetworkImage(
                                 'https://image.tmdb.org/t/p/w500' +
-                                    tv[index]['backdrop_path'],
+                                    (tv[index]['backdrop_path'] ?? 'No Image Found'),
                               ),
                               fit: BoxFit.cover,
                             ),
